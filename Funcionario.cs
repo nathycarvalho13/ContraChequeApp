@@ -99,8 +99,7 @@ namespace ContrachequeApp
             Console.WriteLine($"IRRF: {irrf:C}");
             Console.WriteLine($"Salário Líquido: {salarioLiquido:C}");
             Console.WriteLine($"Férias: {CalcularFerias():C}");
-            Console.WriteLine($"Auxílio Alimentação: {ValeRefeicao:C}"); 
-            Console.WriteLine($"Auxílio Transporte: {ValeTransporte:C}");
+            
 
             if (ValeRefeicao > 0)
                 Console.WriteLine($"Auxílio Alimentação: {ValeRefeicao:C}");
