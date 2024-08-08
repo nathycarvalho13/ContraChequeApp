@@ -38,57 +38,48 @@ class Program
     static void PerguntaInformacoesEmpregado(Funcionario funcionario)
     {
         EscreverLinha("Informações do Empregado");
+        EscreverLinha("");
         EscreverLinha("Digite o nome do funcionário: ");
         funcionario.Nome = Console.ReadLine();
         EscreverLinha("Digite o número de identificação (CPF ou RG): ");
         funcionario.Identificacao = Console.ReadLine();
         EscreverLinha("Digite o cargo/função do funcionário: ");
         funcionario.Cargo = Console.ReadLine();
-        EscreverLinha("Digite a matrícula/número de registro do funcionário: ");
-        funcionario.Matricula = Console.ReadLine();
-        EscreverLinha("Digite a data de admissão (dd/mm/aaaa): ");
-        funcionario.DataAdmissao = Console.ReadLine();
-        EscreverLinha("Digite o departamento/setor do funcionário: ");
-        funcionario.Departamento = Console.ReadLine();
         EscreverLinha("");
     }
 
     static void PerguntaInformacoesContracheque(Funcionario funcionario)
     {
         EscreverLinha("Informações do Contracheque");
+        EscreverLinha("");
         EscreverLinha("Digite o salário do funcionário: ");
         funcionario.Salario = Convert.ToDecimal(Console.ReadLine());
         EscreverLinha("Digite o total de horas extras: ");
         funcionario.HorasExtras = Convert.ToDecimal(Console.ReadLine());
-
         if (funcionario.HorasExtras > 0)
         {
             EscreverLinha("Digite o valor das horas extras: ");
             funcionario.ValorHorasExtras = Convert.ToDecimal(Console.ReadLine());
         }
+        EscreverLinha("Digite o valor do adicional noturno: ");
+        funcionario.AdicionalNoturno = Convert.ToDecimal(Console.ReadLine());
+        EscreverLinha("Digite o valor do adicional de insalubridade: ");
+        funcionario.AdicionalInsalubridade = Convert.ToDecimal(Console.ReadLine());
+        EscreverLinha("Digite o valor do adicional de periculosidade: ");
+        funcionario.AdicionalPericulosidade = Convert.ToDecimal(Console.ReadLine());
+        EscreverLinha("Digite o valor das comissões: ");
+        funcionario.Comissoes = Convert.ToDecimal(Console.ReadLine());
+        EscreverLinha("Digite o valor dos bônus e gratificações: ");
+        funcionario.BonusGratificacoes = Convert.ToDecimal(Console.ReadLine());
+        EscreverLinha("Digite o valor da participação nos lucros e resultados (PLR): ");
+        funcionario.PLR = Convert.ToDecimal(Console.ReadLine());
+        EscreverLinha("");
+    }
 
-        EscreverLinha("Você trabalha no turno da noite? (s/n): ");
-        if (Console.ReadLine().ToLower() == "s")
-        {
-            EscreverLinha("Digite o valor do adicional noturno: ");
-            funcionario.AdicionalNoturno = Convert.ToDecimal(Console.ReadLine());
-            EscreverLinha("Digite o valor do adicional de insalubridade: ");
-            funcionario.AdicionalInsalubridade = Convert.ToDecimal(Console.ReadLine());
-            EscreverLinha("Digite o valor do adicional de periculosidade: ");
-            funcionario.AdicionalPericulosidade = Convert.ToDecimal(Console.ReadLine());
-        }
-
-        EscreverLinha("A empresa oferece comissões, bônus ou PLR? (s/n): ");
-        if (Console.ReadLine().ToLower() == "s")
-        {
-            EscreverLinha("Digite o valor das comissões: ");
-            funcionario.Comissoes = Convert.ToDecimal(Console.ReadLine());
-            EscreverLinha("Digite o valor dos bônus e gratificações: ");
-            funcionario.BonusGratificacoes = Convert.ToDecimal(Console.ReadLine());
-            EscreverLinha("Digite o valor da participação nos lucros e resultados (PLR): ");
-            funcionario.PLR = Convert.ToDecimal(Console.ReadLine());
-        }
-
+    static void PerguntaBeneficios(Funcionario funcionario)
+    {
+        EscreverLinha("Benefícios");
+        EscreverLinha("");
         EscreverLinha("Digite o valor da ajuda de custo: ");
         funcionario.AjudaCusto = Convert.ToDecimal(Console.ReadLine());
         EscreverLinha("Digite o valor do vale transporte: ");
@@ -108,12 +99,6 @@ class Program
         EscreverLinha("");
     }
 
-    static void PerguntaBeneficios(Funcionario funcionario)
-    {
-        EscreverLinha("Benefícios Adicionais");
-        EscreverLinha("Digite o valor total dos benefícios: ");
-    }
-
     static void EscreverLinha(string texto)
     {
         Console.WriteLine(texto);
@@ -123,24 +108,7 @@ class Program
     {
         var contrachequeJson = JsonConvert.SerializeObject(funcionario, Formatting.Indented);
         var caminhoArquivo = "contracheque.json";
-
         File.WriteAllText(caminhoArquivo, contrachequeJson);
         EscreverLinha("Contracheque salvo com sucesso em " + caminhoArquivo);
     }
-}
-
-
-void EscreverLinha(string texto) 
-{
-    Console.WriteLine(texto);
-}
-
-
-static void SalvarContracheque(Funcionario funcionario)
-{
-    string json = JsonConvert.SerializeObject(funcionario);
-    string path = @"C:\Contracheques";
-    Directory.CreateDirectory(path);
-    File.WriteAllText(Path.Combine(path, $"{funcionario.Nome}_contracheque.txt"), json);
-    Console.WriteLine("Contracheque salvo com sucesso!");
 }
